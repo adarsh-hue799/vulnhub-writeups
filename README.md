@@ -1,0 +1,85 @@
+# 💀 VulnHub Writeups
+
+Structured writeups of VulnHub boot2root machines — documented with full enumeration, exploitation, and privilege escalation steps.
+
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-2-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
+
+*Full process documented — recon to root, including what failed and why.*
+
+---
+
+## 🖥️ Machines
+
+| Machine | OS | Difficulty | Author | Key Techniques |
+|---------|-----|------------|--------|----------------|
+| [DC-1](./DC-1) | Linux (Debian) | Easy | DCAU | Drupal CMS, Drupalgeddon2, SUID exploitation |
+| [DC-2](./DC-2) | Linux (Debian) | Easy | DCAU | WordPress, WPScan, CeWL, rbash escape, sudo git |
+
+---
+
+## ⚙️ Methodology
+
+Every machine follows the same structured approach:
+
+    Reconnaissance     →  passive info gathering
+           ↓
+    Enumeration        →  nmap, gobuster, wpscan, nikto
+           ↓
+    Vulnerability      →  manual analysis, CVE lookup
+    Discovery
+           ↓
+    Exploitation       →  metasploit / manual
+           ↓
+    Privilege          →  linpeas, SUID, sudo -l, GTFOBins
+    Escalation
+           ↓
+    Post Exploitation  →  flags, loot
+
+---
+
+## 🔍 Machine Summaries
+
+### DC-1
+
+A purposely built vulnerable lab designed as a beginner-friendly boot2root challenge. Runs **Drupal 7** on Apache, exploitable via Drupalgeddon2. Privilege escalation achieved through a misconfigured SUID permission on `/usr/bin/find`. Contains 5 flags with the ultimate goal of reading the flag in root's home directory.
+
+- **Ports:** 22 (SSH), 80 (HTTP - Drupal 7), 111 (RPCBind)
+- **Exploit:** Drupalgeddon2 (CVE-2018-7600)
+- **PrivEsc:** SUID on `/usr/bin/find` via GTFOBins
+
+---
+
+### DC-2
+
+A follow-up to DC-1, also beginner-friendly. Runs **WordPress** on Apache. Requires generating a custom wordlist with CeWL, brute forcing credentials with WPScan, SSH login as Tom, escaping a restricted bash shell via Vi, switching to Jerry, then exploiting sudo git for root.
+
+- **Ports:** 80 (HTTP - WordPress), 7744 (SSH)
+- **Exploit:** WPScan brute force with CeWL wordlist
+- **PrivEsc:** rbash escape via Vi, sudo git via GTFOBins
+
+---
+
+## 🛠️ Tools Used
+
+![Nmap](https://img.shields.io/badge/-Nmap-blue) ![Metasploit](https://img.shields.io/badge/-Metasploit-blueviolet) ![WPScan](https://img.shields.io/badge/-WPScan-red) ![CeWL](https://img.shields.io/badge/-CeWL-orange) ![GTFOBins](https://img.shields.io/badge/-GTFOBins-black) ![Nikto](https://img.shields.io/badge/-Nikto-green)
+
+---
+
+## 📁 Each Machine Folder Contains
+
+- Full notes with commands and actual output
+- Reasoning behind every step taken
+- Screenshots of key findings
+- Dead ends — what didn't work and why
+
+---
+
+## ⚠️ Disclaimer
+
+All machines documented here are **intentionally vulnerable systems** hosted on VulnHub.
+These techniques are practiced strictly for educational purposes.
+Never test systems without explicit authorization.
+
+---
+
+*Adarsh Dubey · Cybersecurity Student*
