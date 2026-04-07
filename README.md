@@ -2,7 +2,7 @@
 
 Structured writeups of VulnHub boot2root machines — documented with full enumeration, exploitation, and privilege escalation steps.
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-2-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-3-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
 
 *Full process documented — recon to root, including what failed and why.*
 
@@ -14,6 +14,7 @@ Structured writeups of VulnHub boot2root machines — documented with full enume
 |---------|-----|------------|--------|----------------|
 | [DC-1](./DC-1) | Linux (Debian) | Easy | DCAU | Drupal CMS, Drupalgeddon2, SUID exploitation |
 | [DC-2](./DC-2) | Linux (Debian) | Easy | DCAU | WordPress, WPScan, CeWL, rbash escape, sudo git |
+| [MR-ROBOT](./MR-ROBOT) | Linux (CentOS) | Medium | Leon Johnson | WordPress, WPScan, reverse shell, SUID nmap, privilege escalation |
 
 ---
 
@@ -59,9 +60,19 @@ A follow-up to DC-1, also beginner-friendly. Runs **WordPress** on Apache. Requi
 
 ---
 
+### MR-ROBOT
+
+Based on the Mr. Robot TV show, this medium-difficulty machine runs **WordPress** on Apache. Requires enumerating hidden paths via robots.txt, generating a wordlist from the site with CeWL, brute forcing WordPress credentials with WPScan, uploading a reverse shell via the theme editor, then escalating privileges using a SUID bit set on nmap.
+
+- **Ports:** 80 (HTTP - WordPress), 443 (HTTPS), 22 (SSH - filtered)
+- **Exploit:** WordPress reverse shell via theme editor
+- **PrivEsc:** SUID nmap interactive mode via GTFOBins
+
+---
+
 ## 🛠️ Tools Used
 
-![Nmap](https://img.shields.io/badge/-Nmap-blue) ![Metasploit](https://img.shields.io/badge/-Metasploit-blueviolet) ![WPScan](https://img.shields.io/badge/-WPScan-red) ![CeWL](https://img.shields.io/badge/-CeWL-orange) ![GTFOBins](https://img.shields.io/badge/-GTFOBins-black) ![Nikto](https://img.shields.io/badge/-Nikto-green)
+![Nmap](https://img.shields.io/badge/-Nmap-blue) ![Metasploit](https://img.shields.io/badge/-Metasploit-blueviolet) ![WPScan](https://img.shields.io/badge/-WPScan-red) ![CeWL](https://img.shields.io/badge/-CeWL-orange) ![GTFOBins](https://img.shields.io/badge/-GTFOBins-black) ![Nikto](https://img.shields.io/badge/-Nikto-green) ![ffuf](https://img.shields.io/badge/-ffuf-yellow)
 
 ---
 
