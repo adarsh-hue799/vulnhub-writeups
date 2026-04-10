@@ -1,0 +1,5 @@
+::: page
+# STAPLER {#stapler .title}
+
+\
+:::
