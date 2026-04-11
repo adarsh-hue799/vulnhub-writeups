@@ -1,0 +1,16 @@
+::: page
+# 22 {#section .title}
+
+\
+
+22/tcp open ssh OpenSSH 5.8p1 Debian 1ubuntu3 (Ubuntu Linux; protocol
+2.0)
+
+\| ssh-hostkey:
+
+\| 1024 85:d3:2b:01:09:42:7b:20:4e:30:03:6d:d1:8f:95:ff (DSA)
+
+\| 2048 30:7a:31:9a:1b:b8:17:e7:15:df:89:92:0e:cd:58:28 (RSA)
+
+\|\_ 256 10:12:64:4b:7d:ff:6a:87:37:26:38:b1:44:9f:cf:5e (ECDSA)
+:::
