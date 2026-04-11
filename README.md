@@ -2,7 +2,7 @@
 
 Structured writeups of VulnHub boot2root machines — documented with full enumeration, exploitation, and privilege escalation steps.
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-4-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-5-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
 
 *Full process documented — recon to root, including what failed and why.*
 
@@ -16,6 +16,7 @@ Structured writeups of VulnHub boot2root machines — documented with full enume
 | [DC-2](./DC-2) | Linux (Debian) | Easy | DCAU | WordPress, WPScan, CeWL, rbash escape, sudo git |
 | [MR-ROBOT](./MR-ROBOT) | Linux (CentOS) | Medium | Leon Johnson | WordPress, WPScan, reverse shell, SUID nmap, privilege escalation |
 | [STAPLER](./STAPLER) | Linux | Medium | g0tm1lk. | Multi-service enum, multiple entry points, complex wordpress attack |
+| [pWn0S2](./pWn0S2) | Linux | Medium | pWn0S | PHP web exploitation, deeper web attacks |
 
 ---
 
@@ -78,6 +79,16 @@ Created for BSidesLondon 2016, this beginner-to-intermediate machine is a "kitch
 - **Ports:** 21 (FTP), 22 (SSH), 53 (DNS), 80/12380 (HTTP/HTTPS - WordPress), 139/445 (SMB), 3306 (MySQL)
 - **Exploit:** WordPress LFI to read wp-config.php or a malicious plugin upload for a reverse shell.
 - **PrivEsc:** Local kernel exploit (e.g., Ubuntu 16.04 "double-put") or exploiting world-writable cron jobs/scripts.
+  
+---
+
+### pWn0S2
+
+A beginner-to-intermediate web-focused machine running Ubuntu 11.04, designed with multiple entry points through its web application. The primary attack path involves enumerating a Simple PHP Blog installation, exploiting an unauthenticated file upload vulnerability to gain remote code execution, and landing a Meterpreter shell as www-data. The machine emphasizes web application enumeration, CVE research, and privilege escalation on an outdated Linux kernel.
+
+- **Ports:** 22 (SSH), 80 (HTTP - Apache 2.2.17, PHP 5.3.5, Simple PHP Blog)
+- **Exploit:**  Simple PHP Blog unauthenticated file upload (unix/webapp/sphpblog_file_upload) via Metasploit, achieving RCE as www-data.
+- **PrivEsc:** Dirty COW (CVE-2016-5195) kernel exploit targeting Linux 2.6.38, overwriting /etc/passwd to create a root-level user (firefart) OR directory enumeration
   
 ---
 
