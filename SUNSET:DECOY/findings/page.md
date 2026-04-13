@@ -1,5 +1,0 @@
-::: page
-# Findings {#findings .title}
-
-\
-:::
