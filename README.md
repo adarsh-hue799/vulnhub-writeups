@@ -2,7 +2,7 @@
 
 Structured writeups of VulnHub boot2root machines — documented with full enumeration, exploitation, and privilege escalation steps.
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-5-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-6-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
 
 *Full process documented — recon to root, including what failed and why.*
 
@@ -17,6 +17,7 @@ Structured writeups of VulnHub boot2root machines — documented with full enume
 | [MR-ROBOT](./MR-ROBOT) | Linux (CentOS) | Medium | Leon Johnson | WordPress, WPScan, reverse shell, SUID nmap, privilege escalation |
 | [STAPLER](./STAPLER) | Linux | Medium | g0tm1lk. | Multi-service enum, multiple entry points, complex wordpress attack |
 | [pWn0S2](./pWn0S2) | Linux | Medium | pWn0S | PHP web exploitation, deeper web attacks |
+| [SUNSETDECOY](./SUNSETDECOY) | Linux | Medium | whitecr0wz | Log poisoning, realistic privesc chain | pspy |
 
 ---
 
@@ -90,6 +91,16 @@ A beginner-to-intermediate web-focused machine running Ubuntu 11.04, designed wi
 - **Exploit:**  Simple PHP Blog unauthenticated file upload (unix/webapp/sphpblog_file_upload) via Metasploit, achieving RCE as www-data.
 - **PrivEsc:** Dirty COW (CVE-2016-5195) kernel exploit targeting Linux 2.6.38, overwriting /etc/passwd to create a root-level user (firefart) OR directory enumeration
   
+---
+
+### SUNSET: DECOY
+
+A beginner-to-intermediate machine running Debian 64-bit, designed around obfuscation and misdirection. The machine uses MD5 hashes as usernames and hostname, creating an intentional rabbit hole for attackers. The primary attack path involves extracting and cracking shadow file hashes using John the Ripper, SSHing into a restricted bash shell, escaping rbash via PATH manipulation, and discovering a privilege escalation vector through a pspy process log left by the machine creator.
+
+- **Ports:**  22 (SSH), 80 (HTTP)
+- **Exploit:**  Shadow file hash cracking using John the Ripper with full /etc/shadow format — cracked password server for user 296640a3b825115a47b68fc44501c828, followed by SSH login into rbash and PATH variable manipulation to escape the restricted shell.
+- **PrivEsc:**  chkrootkit 0.49 (CVE-2014-0476) local privilege escalation — root runs chkrootkit via cron job which executes /tmp/update if present. Created a malicious /tmp/update reverse shell payload, caught by a Netcat listener on Kali, resulting in a root shell.
+
 ---
 
 ## 🛠️ Tools Used
