@@ -17,7 +17,7 @@ Structured writeups of VulnHub boot2root machines — documented with full enume
 | [MR-ROBOT](./MR-ROBOT) | Linux (CentOS) | Medium | Leon Johnson | WordPress, WPScan, reverse shell, SUID nmap, privilege escalation |
 | [STAPLER](./STAPLER) | Linux | Medium | g0tm1lk. | Multi-service enum, multiple entry points, complex wordpress attack |
 | [pWn0S2](./pWn0S2) | Linux | Medium | pWn0S | PHP web exploitation, deeper web attacks |
-| [SUNSETDECOY](./SUNSETDECOY) | Linux | Medium | whitecr0wz | Log poisoning, realistic privesc chain | pspy |
+| [SUNSETDECOY](./SUNSETDECOY) | Linux | Medium | whitecr0wz | Log poisoning, realistic privesc chain, pspy |
 
 ---
 
