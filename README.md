@@ -2,7 +2,7 @@
 
 Structured writeups of VulnHub boot2root machines — documented with full enumeration, exploitation, and privilege escalation steps.
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-6-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen) ![Machines](https://img.shields.io/badge/Machines_Rooted-7-blue) ![Platform](https://img.shields.io/badge/Platform-VulnHub-orange) ![Focus](https://img.shields.io/badge/Focus-Offensive_Security-darkred)
 
 *Full process documented — recon to root, including what failed and why.*
 
@@ -18,6 +18,7 @@ Structured writeups of VulnHub boot2root machines — documented with full enume
 | [STAPLER](./STAPLER) | Linux | Medium | g0tm1lk. | Multi-service enum, multiple entry points, complex wordpress attack |
 | [pWn0S2](./pWn0S2) | Linux | Medium | pWn0S | PHP web exploitation, deeper web attacks |
 | [SUNSETDECOY](./SUNSETDECOY) | Linux | Medium | whitecr0wz | Log poisoning, realistic privesc chain, pspy |
+| [BRAINPAN-1](./BRAINPAN-1) | Linux (Wine) | Medium | superkojiman | Stack Buffer Overflow, custom exploit dev, sudo GTFOBins |
 
 ---
 
@@ -103,9 +104,19 @@ A beginner-to-intermediate machine running Debian 64-bit, designed around obfusc
 
 ---
 
+### BRAINPAN-1
+
+A medium-difficulty machine built entirely around **stack buffer overflow** exploitation. The vulnerable service (`brainpan.exe`) runs on Linux via Wine, making it a hybrid Windows/Linux target. Initial access requires developing a custom BOF exploit from scratch — fuzzing, EIP control, bad character analysis, JMP ESP return address, and shellcode injection. Post-exploitation involves a straightforward Linux privilege escalation via a sudo misconfiguration.
+
+- **Ports:** 9999 (brainpan.exe — custom password prompt), 10000 (HTTP - Python SimpleHTTPServer 0.6)
+- **Exploit:** Manual stack buffer overflow — 524 byte offset, JMP ESP at `0x311712F3`, `linux/x86/shell_reverse_tcp` shellcode via msfvenom, NOP sled, reverse shell caught on Kali
+- **PrivEsc:** `sudo -l` revealed `anansi_util` — ran `sudo /home/anansi/bin/anansi_util manual man`, spawned root shell via `!bash` (GTFOBins man exploit)
+
+---
+
 ## 🛠️ Tools Used
 
-![Nmap](https://img.shields.io/badge/-Nmap-blue) ![Metasploit](https://img.shields.io/badge/-Metasploit-blueviolet) ![WPScan](https://img.shields.io/badge/-WPScan-red) ![CeWL](https://img.shields.io/badge/-CeWL-orange) ![GTFOBins](https://img.shields.io/badge/-GTFOBins-black) ![Nikto](https://img.shields.io/badge/-Nikto-green) ![ffuf](https://img.shields.io/badge/-ffuf-yellow)
+![Nmap](https://img.shields.io/badge/-Nmap-blue) ![Metasploit](https://img.shields.io/badge/-Metasploit-blueviolet) ![WPScan](https://img.shields.io/badge/-WPScan-red) ![CeWL](https://img.shields.io/badge/-CeWL-orange) ![GTFOBins](https://img.shields.io/badge/-GTFOBins-black) ![Nikto](https://img.shields.io/badge/-Nikto-green) ![ffuf](https://img.shields.io/badge/-ffuf-yellow) ![Immunity Debugger](https://img.shields.io/badge/-Immunity_Debugger-grey) ![msfvenom](https://img.shields.io/badge/-msfvenom-red)
 
 ---
 
